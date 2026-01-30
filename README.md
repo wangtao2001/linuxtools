@@ -1,118 +1,118 @@
 # @wangtao2001/lt
 
-linux 工具集
+A command-line tool for managing CUDA versions, proxy settings, environment variables, and more on linux.
 
-## 安装
+## Installation
 
 ```bash
 npm install -g @wangtao2001/lt
 ```
 
-## 使用方法
+## Usage
 
-### CUDA 版本管理
+### CUDA Version Management
 
 ```bash
-# 列出所有可用的 CUDA 版本
+# List all available CUDA versions
 lt cuda list
 
-# 切换到指定的 CUDA 版本
+# Switch to a specific CUDA version
 lt cuda switch 11.8
 lt cuda switch cuda-12.0
 ```
 
-### 代理设置
+### Proxy Settings
 
 ```bash
-# 设置代理
+# Set proxy
 lt proxy set http://127.0.0.1:7890
 
-# 取消代理
+# Unset proxy
 lt proxy unset
 
-# 显示当前代理状态
+# Show current proxy status
 lt proxy status
 ```
 
-### 环境变量管理
+### Environment Variables Management
 
 ```bash
-# 列出所有环境变量
+# List all environment variables
 lt envs list
 
-# 列出所有环境变量（带值）
+# List all environment variables with values
 lt envs list -v
 lt envs list --values
 
-# 获取指定环境变量（支持通配符）
+# Get specific environment variable (supports wildcards)
 lt envs get PATH
-lt envs get "CUDA*"
+lt envs get CUDA*
 
-# 添加新的环境变量
+# Add new environment variable
 lt envs add MY_VAR "my value"
 
-# 修改环境变量
+# Modify environment variable
 lt envs set MY_VAR "new value"
 
-# 删除环境变量
+# Delete environment variable
 lt envs delete MY_VAR
 ```
 
-### PATH 管理
+### PATH Management
 
 ```bash
-# 列出所有 PATH 组件
+# List all PATH components
 lt envs path list
 
-# 添加目录到 PATH
+# Add directory to PATH
 lt envs path add /usr/local/bin
 
-# 从 PATH 中移除目录
+# Remove directory from PATH
 lt envs path delete /usr/local/bin
 
-# 检查目录是否在 PATH 中
+# Check if directory is in PATH
 lt envs path check /usr/local/bin
 ```
 
-### 网络测试
+### Network Test
 
 ```bash
-# 测试网络连接（访问 google.com）
+# Test network connectivity (access google.com)
 lt t
 ```
 
-## 帮助
+## Help
 
 ```bash
-# 显示帮助
+# Show help
 lt --help
 
-# 显示版本
+# Show version
 lt --version
 
-# 显示子命令帮助
+# Show subcommand help
 lt cuda --help
 lt proxy --help
 lt envs --help
 ```
 
-## 国际化
+## Internationalization
 
-工具支持中文和英文，也可以通过环境变量手动设置：
+The tool supports both Chinese and English, and will automatically select based on system language. You can also manually set it via environment variable:
 
 ```bash
-# 使用英文
+# Use English
 export LT_LANG=en
 
-# 使用中文
+# Use Chinese
 export LT_LANG=zh
 ```
 
-## 注意事项
+## Notes
 
-- 修改环境变量后，需要运行 `source ~/.zshrc`（或 `~/.bashrc`）或重新打开终端使更改生效
-- 工具会自动检测当前使用的 shell（bash 或 zsh）
-- 语言会根据系统 `LANG` 环境变量自动选择，也可通过 `LT_LANG` 环境变量覆盖
+- After modifying environment variables, run `source ~/.zshrc` (or `~/.bashrc`) or restart your terminal for changes to take effect
+- The tool automatically detects your current shell (bash or zsh)
+- Language is automatically selected based on system `LANG` environment variable, can be overridden with `LT_LANG`
 
 ## License
 
