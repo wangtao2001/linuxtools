@@ -1,0 +1,20 @@
+Source: linuxtools
+Section: utils
+Priority: optional
+Maintainer: wangtao <your-email@example.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.0
+Homepage: https://github.com/yourusername/linuxtools
+Vcs-Browser: https://github.com/yourusername/linuxtools
+Vcs-Git: https://github.com/yourusername/linuxtools.git
+Rules-Requires-Root: no
+
+Package: linuxtools
+Architecture: all
+Depends: ${misc:Depends}, bash, coreutils, sed, grep, wget
+Description: A collection of useful Linux command-line tools
+ A set of practical Linux CLI utility scripts, including:
+  - cuda: CUDA version management tool
+  - envs: Environment variable management tool
+  - proxy: Proxy settings management tool
+  - t: Network connectivity test tool

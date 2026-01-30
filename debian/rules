@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	install -d $(CURDIR)/debian/linuxtools/usr/bin
+	install -m 755 cuda.sh $(CURDIR)/debian/linuxtools/usr/bin/cuda
+	install -m 755 envs.sh $(CURDIR)/debian/linuxtools/usr/bin/envs
+	install -m 755 proxy.sh $(CURDIR)/debian/linuxtools/usr/bin/proxy
+	install -m 755 t.sh $(CURDIR)/debian/linuxtools/usr/bin/t

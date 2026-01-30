@@ -3,27 +3,27 @@
 CUDA_DIR="/usr/local"
 DEFAULT_CUDA_FILE="$HOME/.default_cuda"
 
-# 扫描可用的 CUDA 版本
+# List available CUDA versions
 list_cuda_versions() {
     if [ ! -d "$CUDA_DIR" ]; then
-        echo "未找到 $CUDA_DIR 目录。"
+        echo "Directory $CUDA_DIR not found."
         return 1
     fi
 
-    # 获取当前使用的CUDA版本
+    # Get current CUDA version
     current_cuda=$(echo $PATH | grep -o '/usr/local/cuda-[0-9]\+\(\.[0-9]\+\)\?/bin' | head -n1 | grep -o '[0-9]\+\(\.[0-9]\+\)\?')
 
     versions=$(ls "$CUDA_DIR" | grep -E '^cuda-[0-9]+(\.[0-9]+)?$')
     if [ -z "$versions" ]; then
-        echo "未检测到任何 CUDA 版本。"
+        echo "No CUDA versions detected."
         return 1
     fi
 
-    echo "检测到的 CUDA 版本："
+    echo "Detected CUDA versions:"
     for version in $versions; do
         version_number=${version#cuda-}
         prefix=" - "
-        # 如果是当前版本，添加标记
+        # Mark current version
         if [ "$version_number" = "$current_cuda" ]; then
             prefix=" * "
         fi
@@ -38,9 +38,9 @@ list_cuda_versions() {
     done
 }
 
-# 切换到指定 CUDA 版本
+# Switch to specified CUDA version
 switch_cuda_version() {
-    # 检查输入版本号格式,如果不包含cuda-前缀则添加
+    # Add cuda- prefix if not present
     if [[ $1 != cuda-* ]]; then
         version="cuda-$1"
     else
@@ -50,40 +50,39 @@ switch_cuda_version() {
     cuda_path="$CUDA_DIR/$version"
 
     if [ ! -d "$cuda_path" ]; then
-        echo "错误：$cuda_path 不存在，请确认 CUDA 版本是否正确。"
+        echo "Error: $cuda_path does not exist. Please verify the CUDA version."
         return 1
     fi
-    # 检查是否已经存在相关配置
+    # Check for existing configuration
     zshrc="$HOME/.zshrc"
     
-    # 删除已有的 CUDA 路径配置
+    # Remove existing CUDA path configuration
     sed -i '/^export PATH="\/usr\/local\/cuda-.*\/bin:\$PATH"$/d' "$zshrc"
     sed -i '/^export LD_LIBRARY_PATH="\/usr\/local\/cuda-.*\/lib64:\$LD_LIBRARY_PATH"$/d' "$zshrc"
     
-    # 添加新的配置
+    # Add new configuration
     echo "export PATH=\"$cuda_path/bin:\$PATH\"" >> "$zshrc"
     echo "export LD_LIBRARY_PATH=\"$cuda_path/lib64:\$LD_LIBRARY_PATH\"" >> "$zshrc"
 
-    echo "已切换到 CUDA 版本：$version"
+    echo "Switched to CUDA version: $version"
 }
 
-# 命令行参数解析
+# Command line argument parsing
 case $1 in
     list)
         list_cuda_versions
         ;;
     switch)
         if [ -z "$2" ]; then
-            echo "用法：cuda switch <version>"
+            echo "Usage: cuda switch <version>"
             exit 1
         fi
         switch_cuda_version "$2"
         ;;
     *)
-        echo "用法：cuda {list|switch}"
-        echo "  list              - 列出所有可用的 CUDA 版本"
-        echo "  switch <version>  - 切换到指定的 CUDA 版本"
+        echo "Usage: cuda {list|switch}"
+        echo "  list              - List all available CUDA versions"
+        echo "  switch <version>  - Switch to the specified CUDA version"
         exit 1
         ;;
 esac
-
