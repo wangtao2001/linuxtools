@@ -1,0 +1,37 @@
+{
+  "name": "@wangtao2001/lt",
+  "version": "1.0.0",
+  "description": "linux 工具集",
+  "main": "src/index.js",
+  "bin": {
+    "lt": "./bin/lt.js"
+  },
+  "scripts": {
+    "test": "node bin/lt.js --help"
+  },
+  "keywords": [
+    "linux",
+    "tools",
+    "cuda",
+    "proxy",
+    "environment",
+    "cli"
+  ],
+  "author": "wangtao2001",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wangtao2001/lt.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "dependencies": {
+    "commander": "^12.0.0",
+    "chalk": "^4.1.2"
+  }
+}

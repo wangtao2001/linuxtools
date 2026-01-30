@@ -1,0 +1,15 @@
+# Shell scripts (原始脚本)
+*.sh
+
+# Git
+.git
+.gitignore
+
+# Debian packaging
+debian/
+
+# Development
+node_modules/
+.vscode/
+.cursor/
+*.log

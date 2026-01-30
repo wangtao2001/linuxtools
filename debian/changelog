@@ -1,8 +1,0 @@
-linuxtools (1.0.0-1) jammy; urgency=medium
-
-  * Initial release
-  * cuda: CUDA 版本管理工具
-  * envs: 环境变量管理工具
-  * proxy: 代理设置管理工具
-
- -- wangtao <wangtao.cpu@gmail.com>  Fri, 30 Jan 2026 12:00:00 +0800
